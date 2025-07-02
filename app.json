@@ -2,6 +2,7 @@
   "pages": [
     "pages/activity/activity",
     "pages/batchSelection/batchSelection",
+    "pages/registrationForm/registrationForm",
     "pages/index/index",
     "pages/logs/logs"
   ],

@@ -13,7 +13,18 @@ Page({
   // 获取用户的 openid
   getOpenid: function() {
     const that = this;
-    // 调用微信登录接口
+    // 先尝试从本地存储获取 openid
+    const storedOpenid = wx.getStorageSync('openid');
+    if (storedOpenid) {
+      that.setData({
+        openid: storedOpenid
+      });
+      // 获取用户角色
+      that.getUserRole(storedOpenid);
+      return;
+    }
+    
+    // 如果本地存储没有 openid，则调用微信登录接口
     wx.login({
       success: function(loginRes) {
         if (loginRes.code) {
@@ -27,6 +38,9 @@ Page({
             },
             success: function(res) {
               if (res.data && res.data.openid) {
+                // 将 openid 存储到本地存储中
+                wx.setStorageSync('openid', res.data.openid);
+                
                 that.setData({
                   openid: res.data.openid
                 });

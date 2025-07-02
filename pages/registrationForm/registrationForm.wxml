@@ -1,0 +1,115 @@
+<view class="registration-form-container">
+  <view class="form-title">报名表单</view>
+  
+  <!-- 加载中状态 -->
+  <view wx:if="{{loading}}" class="loading">
+    <text>加载中...</text>
+  </view>
+  
+  <!-- 表单内容 -->
+  <view wx:else class="form-content">
+    <!-- 批次信息 -->
+    <view class="batch-info">
+      <text class="batch-name">{{batchName}}</text>
+    </view>
+    
+    <!-- 表单项 -->
+    <view class="form-item">
+      <view class="form-item-label">1. 您的姓名</view>
+      <input class="form-input" value="{{name}}" bindinput="onNameInput" placeholder="请输入姓名" />
+    </view>
+    
+    <view class="form-item">
+      <view class="form-item-label">2. 您的性别</view>
+      <picker mode="selector" range="{{genderOptions}}" bindchange="onGenderChange">
+        <view class="picker-content {{gender ? '' : 'placeholder'}}">
+          {{gender || '请选择性别'}}
+        </view>
+      </picker>
+    </view>
+    
+    <view class="form-item">
+      <view class="form-item-label">3. 联系方式</view>
+      <input class="form-input" value="{{contact}}" bindinput="onContactInput" placeholder="请输入联系方式" />
+    </view>
+    
+    <view class="form-item">
+      <view class="form-item-label">4. 您身份证号码</view>
+      <input class="form-input" value="{{idNumber}}" bindinput="onIdNumberInput" placeholder="请输入证件号码" />
+    </view>
+    
+    <view class="form-item">
+      <view class="form-item-label">5. 您选择的参赛日期（可多选）</view>
+      <view class="date-list">
+        <checkbox-group>
+          <block wx:for="{{dailyCompetitionTimes}}" wx:key="*this">
+            <label class="date-item-wrapper" bindtap="onDateChange" data-index="{{index}}">
+              <checkbox class="date-checkbox" />
+              <view class="date-item-text {{selectedDates.indexOf(item) > -1 ? 'date-selected-text' : ''}}">
+                {{item}}
+              </view>
+            </label>
+          </block>
+        </checkbox-group>
+      </view>
+    </view>
+    
+    <view class="form-item">
+      <view class="form-item-label">6. 您的帮抄人员</view>
+      <radio-group class="radio-group" bindchange="onHelperChange">
+        <label class="radio-label">
+          <radio value="自备人员" />自备人员
+        </label>
+        <label class="radio-label">
+          <radio value="主办方提供" />主办方提供
+        </label>
+      </radio-group>
+    </view>
+    
+    <view class="form-item">
+      <view class="form-item-label">您的报名费用</view>
+      <view class="fee-info">
+        <text class="fee-amount">{{fee}}</text> 元（根据选项 5 个数结算）
+      </view>
+    </view>
+    
+    <!-- 参赛须知 -->
+    <view class="notice-section">
+      <checkbox-group bindchange="onAgreeChange">
+        <label class="checkbox-label">
+          <checkbox value="agree" checked="{{isAgree}}" />
+          <text class="checkbox-text">参赛须知：系统报名成功后参赛信息不可修改，请确认保存细确认报名信息。选手因个人原因报名后不参加比赛报名费用不予退还。</text>
+        </label>
+      </checkbox-group>
+    </view>
+    
+    <!-- 按钮区域 -->
+    <view class="button-group">
+      <button class="btn-submit {{isSubmitted ? 'btn-disabled' : ''}}" bindtap="onSubmit" disabled="{{isSubmitted}}">提交</button>
+      <button class="btn-pay {{!isSubmitted ? 'btn-disabled' : ''}}" bindtap="onPay" disabled="{{!isSubmitted}}">支付</button>
+    </view>
+  </view>
+  
+  <!-- 提交确认对话框 -->
+  <view class="modal" wx:if="{{showSubmitConfirm}}">
+    <view class="modal-content">
+      <view class="modal-title">是否确认提交报名信息？</view>
+      <view class="modal-btn-group">
+        <button class="modal-btn modal-btn-confirm" bindtap="confirmSubmit">是</button>
+        <button class="modal-btn modal-btn-cancel" bindtap="cancelSubmit">否</button>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 支付确认对话框 -->
+  <view class="modal" wx:if="{{showPayConfirm}}">
+    <view class="modal-content">
+      <view class="modal-title">费用支付</view>
+      <view class="modal-fee">{{fee}} 元（根据选项 5 个数结算）</view>
+      <view class="modal-btn-group">
+        <button class="modal-btn modal-btn-confirm" bindtap="confirmPay">是</button>
+        <button class="modal-btn modal-btn-cancel" bindtap="cancelPay">否</button>
+      </view>
+    </view>
+  </view>
+</view> 
