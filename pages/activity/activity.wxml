@@ -1,0 +1,17 @@
+<view class="container">
+  <view class="title">活动报名</view>
+  
+  <!-- 加载中状态 -->
+  <view wx:if="{{loading}}" class="loading">
+    <text>加载中...</text>
+  </view>
+  
+  <!-- 根据角色展示不同的按钮 -->
+  <view wx:else class="button-container">
+    <!-- 普通用户显示报名按钮 -->
+    <button wx:if="{{!isAdmin}}" class="register-btn" bindtap="handleRegister">点击报名</button>
+    
+    <!-- 管理员显示查看报名按钮 -->
+    <button wx:else class="admin-btn" bindtap="handleViewRegistrations">查看报名</button>
+  </view>
+</view> 
