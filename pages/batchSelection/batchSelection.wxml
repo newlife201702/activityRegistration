@@ -19,7 +19,11 @@
   <!-- 批次列表 -->
   <view wx:elif="{{batches.length > 0}}" class="batch-list">
     <block wx:for="{{batches}}" wx:key="id">
-      <view class="batch-item" bindtap="selectBatch" data-id="{{item.id}}" data-name="{{item.name}}">
+      <view class="batch-item {{item.status === '已开放' ? 'batch-item-active' : 'batch-item-inactive'}}" 
+            bindtap="selectBatch" 
+            data-id="{{item.id}}" 
+            data-name="{{item.name}}"
+            data-status="{{item.status}}">
         <view class="batch-name">{{item.name}}</view>
         <view class="batch-info">
           <view class="info-item">
@@ -37,6 +41,11 @@
         </view>
         <view class="batch-desc">{{item.description}}</view>
         <view class="batch-status {{item.status === '已开放' ? 'status-active' : 'status-inactive'}}">{{item.status}}</view>
+        
+        <!-- 未开放批次提示 -->
+        <view wx:if="{{item.status !== '已开放'}}" class="batch-unavailable-mask">
+          <view class="unavailable-text">未开放报名</view>
+        </view>
       </view>
     </block>
   </view>

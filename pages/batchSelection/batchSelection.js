@@ -38,10 +38,19 @@ Page({
   selectBatch: function(e) {
     const batchId = e.currentTarget.dataset.id;
     const batchName = e.currentTarget.dataset.name;
+    const status = e.currentTarget.dataset.status;
     
-    // 跳转到报名表单页面，并传递批次ID和名称
-    wx.navigateTo({
-      url: `/pages/registrationForm/registrationForm?batchId=${batchId}&batchName=${batchName}`
-    });
+    // 只有状态为"已开放"的批次才能被选择
+    if (status === '已开放') {
+      // 跳转到报名表单页面，并传递批次ID和名称
+      wx.navigateTo({
+        url: `/pages/registrationForm/registrationForm?batchId=${batchId}&batchName=${batchName}`
+      });
+    } else {
+      wx.showToast({
+        title: '该批次未开放报名',
+        icon: 'none'
+      });
+    }
   }
 }) 

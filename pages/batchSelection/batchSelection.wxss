@@ -33,6 +33,36 @@
   position: relative;
 }
 
+.batch-item-active {
+  cursor: pointer;
+}
+
+.batch-item-inactive {
+  opacity: 0.8;
+  position: relative;
+}
+
+.batch-unavailable-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+}
+
+.unavailable-text {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 15px;
+  font-size: 14px;
+}
+
 .batch-name {
   font-size: 18px;
   font-weight: bold;
