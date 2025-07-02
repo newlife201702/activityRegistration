@@ -1,0 +1,48 @@
+<wxs module="utils">
+  function splitString(str, separator) {
+    if (!str) return [];
+    return str.split(separator);
+  }
+  module.exports = {
+    splitString: splitString
+  };
+</wxs>
+
+<view class="batch-selection-container">
+  <view class="title">选择报名批次</view>
+  
+  <!-- 加载中状态 -->
+  <view wx:if="{{loading}}" class="loading">
+    <text>加载中...</text>
+  </view>
+  
+  <!-- 批次列表 -->
+  <view wx:elif="{{batches.length > 0}}" class="batch-list">
+    <block wx:for="{{batches}}" wx:key="id">
+      <view class="batch-item" bindtap="selectBatch" data-id="{{item.id}}" data-name="{{item.name}}">
+        <view class="batch-name">{{item.name}}</view>
+        <view class="batch-info">
+          <view class="info-item">
+            <view class="info-label">报名时间：</view>
+            <view class="info-value">{{item.registration_time}}</view>
+          </view>
+          <view class="info-item">
+            <view class="info-label">比赛时间：</view>
+            <view class="info-value competition-times">
+              <block wx:for="{{utils.splitString(item.competition_time, ',')}}" wx:for-item="time" wx:key="*this">
+                <view class="time-item">{{time}}</view>
+              </block>
+            </view>
+          </view>
+        </view>
+        <view class="batch-desc">{{item.description}}</view>
+        <view class="batch-status {{item.status === '已开放' ? 'status-active' : 'status-inactive'}}">{{item.status}}</view>
+      </view>
+    </block>
+  </view>
+  
+  <!-- 无数据状态 -->
+  <view wx:else class="no-data">
+    <text>暂无可报名批次</text>
+  </view>
+</view> 

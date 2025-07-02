@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/activity/activity",
+    "pages/batchSelection/batchSelection",
     "pages/index/index",
     "pages/logs/logs"
   ],
