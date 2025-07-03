@@ -70,8 +70,8 @@ Page({
   fetchBatchDetail: function(batchId) {
     const that = this;
     wx.request({
-      // url: `https://activityregistration.weimeigu.com.cn/batch/${batchId}`,
-      url: `http://localhost:8788/batch/${batchId}`,
+      url: `https://activityregistration.weimeigu.com.cn/batch/${batchId}`,
+      // url: `http://localhost:9999/batch/${batchId}`,
       method: 'GET',
       success: function(res) {
         if (res.data) {
