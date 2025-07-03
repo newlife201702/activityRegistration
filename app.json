@@ -3,6 +3,7 @@
     "pages/activity/activity",
     "pages/batchSelection/batchSelection",
     "pages/registrationForm/registrationForm",
+    "pages/registrationList/registrationList",
     "pages/index/index",
     "pages/logs/logs"
   ],

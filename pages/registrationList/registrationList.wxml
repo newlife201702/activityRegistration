@@ -1,0 +1,101 @@
+<view class="registration-list-container">
+  <view class="page-title">报名信息列表</view>
+  
+  <!-- 加载中状态 -->
+  <view wx:if="{{loading}}" class="loading">
+    <text>加载中...</text>
+  </view>
+  
+  <!-- 搜索筛选区域 -->
+  <view class="search-filter-area">
+    <view class="search-box">
+      <input class="search-input" value="{{searchKeyword}}" bindinput="onSearchInput" placeholder="请输入姓名或联系方式" />
+      <view class="search-btn" bindtap="onSearch">搜索</view>
+    </view>
+    
+    <view class="filter-options">
+      <view class="filter-item {{filterType === 'all' ? 'active' : ''}}" bindtap="setFilter" data-type="all">全部</view>
+      <view class="filter-item {{filterType === 'name' ? 'active' : ''}}" bindtap="setFilter" data-type="name">按姓名</view>
+      <view class="filter-item {{filterType === 'contact' ? 'active' : ''}}" bindtap="setFilter" data-type="contact">按联系方式</view>
+    </view>
+  </view>
+  
+  <!-- 列表内容 -->
+  <view class="list-content" wx:if="{{!loading && registrations.length > 0}}">
+    <view class="list-header">
+      <view class="header-item name">姓名</view>
+      <view class="header-item gender">性别</view>
+      <view class="header-item contact">联系方式</view>
+      <view class="header-item dates">参赛日期</view>
+      <view class="header-item fee">费用</view>
+    </view>
+    
+    <scroll-view scroll-y="true" class="registration-list">
+      <block wx:for="{{registrations}}" wx:key="id">
+        <view class="registration-item" bindtap="showDetail" data-id="{{item.id}}">
+          <view class="item-info name">{{item.name}}</view>
+          <view class="item-info gender">{{item.gender}}</view>
+          <view class="item-info contact">{{item.contact}}</view>
+          <view class="item-info dates">{{item.selectedDatesArray.length}}项</view>
+          <view class="item-info fee">{{item.registration_fee}}元</view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+  
+  <!-- 无数据提示 -->
+  <view class="no-data" wx:if="{{!loading && registrations.length === 0}}">
+    <text>暂无报名信息</text>
+  </view>
+  
+  <!-- 详情弹窗 -->
+  <view class="detail-modal" wx:if="{{showDetailModal}}">
+    <view class="modal-content">
+      <view class="modal-header">
+        <view class="modal-title">报名详情</view>
+        <view class="modal-close" bindtap="hideDetail">×</view>
+      </view>
+      
+      <view class="modal-body">
+        <view class="detail-item">
+          <text class="detail-label">姓名：</text>
+          <text class="detail-value">{{currentRegistration.name}}</text>
+        </view>
+        <view class="detail-item">
+          <text class="detail-label">性别：</text>
+          <text class="detail-value">{{currentRegistration.gender}}</text>
+        </view>
+        <view class="detail-item">
+          <text class="detail-label">联系方式：</text>
+          <text class="detail-value">{{currentRegistration.contact}}</text>
+        </view>
+        <view class="detail-item">
+          <text class="detail-label">证件号码：</text>
+          <text class="detail-value">{{currentRegistration.id_card_number}}</text>
+        </view>
+        <view class="detail-item">
+          <text class="detail-label">帮抄人员：</text>
+          <text class="detail-value">{{currentRegistration.copy_helper}}</text>
+        </view>
+        <view class="detail-item">
+          <text class="detail-label">参赛日期：</text>
+          <view class="dates-list">
+            <block wx:for="{{currentRegistration.selectedDatesArray}}" wx:key="*this">
+              <text class="date-item">{{item}}</text>
+            </block>
+          </view>
+        </view>
+        <view class="detail-item">
+          <text class="detail-label">费用：</text>
+          <text class="detail-value">{{currentRegistration.registration_fee}}元</text>
+        </view>
+        <view class="detail-item">
+          <text class="detail-label">支付状态：</text>
+          <text class="detail-value {{currentRegistration.isPaid ? 'paid' : 'unpaid'}}">
+            {{currentRegistration.pay_status === 'paid' ? '已支付' : '未支付'}}
+          </text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view> 
