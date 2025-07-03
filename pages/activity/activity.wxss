@@ -26,6 +26,21 @@
   width: 90%;
 }
 
+/* 按钮区域样式 */
+.button-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.banner-image {
+  width: 100%;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
 .register-btn, .admin-btn {
   width: 100%;
   height: 50px;

@@ -9,7 +9,10 @@
   <!-- 根据角色展示不同的内容 -->
   <view wx:else class="content-container">
     <!-- 管理员显示查看报名按钮 -->
-    <button wx:if="{{isAdmin}}" class="admin-btn" bindtap="handleViewRegistrations">查看报名</button>
+    <view wx:if="{{isAdmin}}" class="button-section">
+      <image class="banner-image" src="{{adminBannerUrl}}" mode="widthFix"></image>
+      <button class="admin-btn" bindtap="handleViewRegistrations">查看报名</button>
+    </view>
     
     <!-- 普通用户展示内容 -->
     <view wx:else>
@@ -58,7 +61,10 @@
       </view>
       
       <!-- 未报名用户显示报名按钮 -->
-      <button wx:else class="register-btn" bindtap="handleRegister">点击报名</button>
+      <view wx:else class="button-section">
+        <image class="banner-image" src="{{registerBannerUrl}}" mode="widthFix"></image>
+        <button class="register-btn" bindtap="handleRegister">点击报名</button>
+      </view>
     </view>
   </view>
 </view> 

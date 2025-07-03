@@ -1,5 +1,5 @@
 <view class="registration-form-container">
-  <view class="form-title">报名表单</view>
+  <view class="form-title">请填写您的报名信息</view>
   
   <!-- 加载中状态 -->
   <view wx:if="{{loading}}" class="loading">
@@ -69,7 +69,7 @@
     <view class="form-item">
       <view class="form-item-label">您的报名费用</view>
       <view class="fee-info">
-        <text class="fee-amount">{{fee}}</text> 元（根据选项 5 个数结算）
+        <text class="fee-amount">{{fee}}</text> 元
       </view>
     </view>
     
@@ -105,7 +105,7 @@
   <view class="modal" wx:if="{{showPayConfirm}}">
     <view class="modal-content">
       <view class="modal-title">费用支付</view>
-      <view class="modal-fee">{{fee}} 元（根据选项 5 个数结算）</view>
+      <view class="modal-fee">{{fee}} 元</view>
       <view class="modal-btn-group">
         <button class="modal-btn modal-btn-confirm" bindtap="confirmPay">是</button>
         <button class="modal-btn modal-btn-cancel" bindtap="cancelPay">否</button>

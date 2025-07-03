@@ -4,7 +4,9 @@ Page({
     loading: true,
     openid: '',
     userRegistration: null,
-    hasRegistered: false
+    hasRegistered: false,
+    adminBannerUrl: '/images/banner.jpg',
+    registerBannerUrl: '/images/banner.jpg'
   },
 
   onLoad: function() {
