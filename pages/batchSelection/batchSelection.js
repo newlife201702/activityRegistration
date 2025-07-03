@@ -13,8 +13,8 @@ Page({
   fetchBatches: function() {
     const that = this;
     wx.request({
-      // url: 'https://activityregistration.weimeigu.com.cn/batches',
-      url: 'http://localhost:8788/batches', // 获取报名批次的接口
+      url: 'https://activityregistration.weimeigu.com.cn/batches',
+      // url: 'http://localhost:9999/batches', // 获取报名批次的接口
       method: 'GET',
       success: function(res) {
         that.setData({

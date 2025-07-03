@@ -265,8 +265,8 @@ Page({
     
     // 调用提交接口
     wx.request({
-      // url: 'https://activityregistration.weimeigu.com.cn/registration/submit',
-      url: 'http://localhost:8788/registration/submit',
+      url: 'https://activityregistration.weimeigu.com.cn/registration/submit',
+      // url: 'http://localhost:9999/registration/submit',
       method: 'POST',
       data: {
         batchId: that.data.batchId,
@@ -338,8 +338,8 @@ Page({
     
     // 调用微信支付
     wx.request({
-      // url: 'https://activityregistration.weimeigu.com.cn/registration/pay',
-      url: 'http://localhost:8788/registration/pay',
+      url: 'https://activityregistration.weimeigu.com.cn/registration/pay',
+      // url: 'http://localhost:9999/registration/pay',
       method: 'POST',
       data: {
         batchId: that.data.batchId,

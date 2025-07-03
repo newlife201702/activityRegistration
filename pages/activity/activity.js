@@ -32,8 +32,8 @@ Page({
         if (loginRes.code) {
           // 获取到登录凭证，调用后端接口获取 openid
           wx.request({
-            // url: 'https://activityregistration.weimeigu.com.cn/getOpenid',
-            url: 'http://localhost:8788/getOpenid',
+            url: 'https://activityregistration.weimeigu.com.cn/getOpenid',
+            // url: 'http://localhost:9999/getOpenid',
             method: 'POST',
             data: {
               code: loginRes.code
@@ -95,8 +95,8 @@ Page({
     const that = this;
     // 调用接口获取用户角色信息，传入 openid
     wx.request({
-      // url: 'https://activityregistration.weimeigu.com.cn/getuserInfo',
-      url: 'http://localhost:8788/getuserInfo',
+      url: 'https://activityregistration.weimeigu.com.cn/getuserInfo',
+      // url: 'http://localhost:9999/getuserInfo',
       method: 'GET',
       data: {
         openid: openid || that.data.openid

@@ -33,8 +33,8 @@ Page({
     
     // 调用接口获取报名列表
     wx.request({
-      // url: 'https://activityregistration.weimeigu.com.cn/registration/list',
-      url: 'http://localhost:8788/registration/list',
+      url: 'https://activityregistration.weimeigu.com.cn/registration/list',
+      // url: 'http://localhost:9999/registration/list',
       method: 'GET',
       data: {
         openid: openid
