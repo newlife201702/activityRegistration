@@ -70,6 +70,7 @@ Page({
   fetchBatchDetail: function(batchId) {
     const that = this;
     wx.request({
+      // url: `https://activityregistration.weimeigu.com.cn/batch/${batchId}`,
       url: `http://localhost:8788/batch/${batchId}`,
       method: 'GET',
       success: function(res) {
@@ -264,6 +265,7 @@ Page({
     
     // 调用提交接口
     wx.request({
+      // url: 'https://activityregistration.weimeigu.com.cn/registration/submit',
       url: 'http://localhost:8788/registration/submit',
       method: 'POST',
       data: {
@@ -336,17 +338,23 @@ Page({
     
     // 调用微信支付
     wx.request({
+      // url: 'https://activityregistration.weimeigu.com.cn/registration/pay',
       url: 'http://localhost:8788/registration/pay',
       method: 'POST',
       data: {
         batchId: that.data.batchId,
-        fee: that.data.fee
+        fee: that.data.fee,
+        openid: that.data.openid
       },
       success: function(res) {
-        if (res.data && res.data.payParams) {
+          if (res.data) {
           // 调用微信支付接口
           wx.requestPayment({
-            ...res.data.payParams,
+            timeStamp: res.data.timeStamp,
+            nonceStr: res.data.nonceStr,
+            package: res.data.package,
+            signType: res.data.signType || 'MD5',
+            paySign: res.data.paySign,
             success: function() {
               wx.showToast({
                 title: '您已完成报名！期待您的比赛',
