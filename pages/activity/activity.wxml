@@ -6,12 +6,59 @@
     <text>加载中...</text>
   </view>
   
-  <!-- 根据角色展示不同的按钮 -->
-  <view wx:else class="button-container">
-    <!-- 普通用户显示报名按钮 -->
-    <button wx:if="{{!isAdmin}}" class="register-btn" bindtap="handleRegister">点击报名</button>
-    
+  <!-- 根据角色展示不同的内容 -->
+  <view wx:else class="content-container">
     <!-- 管理员显示查看报名按钮 -->
-    <button wx:else class="admin-btn" bindtap="handleViewRegistrations">查看报名</button>
+    <button wx:if="{{isAdmin}}" class="admin-btn" bindtap="handleViewRegistrations">查看报名</button>
+    
+    <!-- 普通用户展示内容 -->
+    <view wx:else>
+      <!-- 已报名用户显示报名信息 -->
+      <view wx:if="{{hasRegistered}}" class="registration-info">
+        <view class="info-title">您的报名信息</view>
+        
+        <view class="info-content">
+          <view class="detail-item">
+            <text class="detail-label">姓名：</text>
+            <text class="detail-value">{{userRegistration.name}}</text>
+          </view>
+          <view class="detail-item">
+            <text class="detail-label">性别：</text>
+            <text class="detail-value">{{userRegistration.gender}}</text>
+          </view>
+          <view class="detail-item">
+            <text class="detail-label">联系方式：</text>
+            <text class="detail-value">{{userRegistration.contact}}</text>
+          </view>
+          <view class="detail-item">
+            <text class="detail-label">证件号码：</text>
+            <text class="detail-value">{{userRegistration.id_card_number}}</text>
+          </view>
+          <view class="detail-item">
+            <text class="detail-label">帮抄人员：</text>
+            <text class="detail-value">{{userRegistration.copy_helper}}</text>
+          </view>
+          <view class="detail-item">
+            <text class="detail-label">参赛日期：</text>
+            <view class="dates-list">
+              <block wx:for="{{userRegistration.selectedDatesArray}}" wx:key="*this">
+                <text class="date-item">{{item}}</text>
+              </block>
+            </view>
+          </view>
+          <view class="detail-item">
+            <text class="detail-label">费用：</text>
+            <text class="detail-value">{{userRegistration.registration_fee}}元</text>
+          </view>
+          <view class="detail-item">
+            <text class="detail-label">支付状态：</text>
+            <text class="detail-value {{userRegistration.pay_status === 'paid' ? 'paid' : 'unpaid'}}">{{userRegistration.pay_status === 'paid' ? '已支付' : '未支付'}}</text>
+          </view>
+        </view>
+      </view>
+      
+      <!-- 未报名用户显示报名按钮 -->
+      <button wx:else class="register-btn" bindtap="handleRegister">点击报名</button>
+    </view>
   </view>
 </view> 

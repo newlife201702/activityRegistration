@@ -2,7 +2,9 @@ Page({
   data: {
     isAdmin: false,
     loading: true,
-    openid: ''
+    openid: '',
+    userRegistration: null,
+    hasRegistered: false
   },
 
   onLoad: function() {
@@ -102,10 +104,37 @@ Page({
       success: function(res) {
         // 假设接口返回的数据中有 role 字段，'admin' 表示管理员，其他值表示普通用户
         const isAdmin = res.data.role === 'admin';
+        
+        // 设置管理员状态
         that.setData({
           isAdmin: isAdmin,
           loading: false
         });
+        
+        // 如果不是管理员，处理用户报名信息
+        if (!isAdmin) {
+          // 检查是否有报名信息
+          if (res.data && res.data.id) {
+            // 如果有报名信息，处理日期数据
+            let registration = res.data;
+            
+            // 将日期字符串转换为数组
+            if (registration.participation_date && typeof registration.participation_date === 'string') {
+              registration.selectedDatesArray = registration.participation_date.split(',');
+            } else {
+              registration.selectedDatesArray = [];
+            }
+            
+            that.setData({
+              userRegistration: registration,
+              hasRegistered: true
+            });
+          } else {
+            that.setData({
+              hasRegistered: false
+            });
+          }
+        }
       },
       fail: function() {
         // 请求失败时默认为普通用户
