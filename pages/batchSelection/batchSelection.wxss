@@ -1,6 +1,6 @@
 .batch-selection-container {
   padding: 20px;
-  background-color: #f8f8f8;
+  background-color: #f0f9ff;
   min-height: 100vh;
 }
 

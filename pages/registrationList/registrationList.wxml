@@ -77,6 +77,10 @@
           <text class="detail-label">帮抄人员：</text>
           <text class="detail-value">{{currentRegistration.copy_helper}}</text>
         </view>
+        <view class="detail-item" wx:if="{{currentRegistration.license_plate}}">
+          <text class="detail-label">车牌号：</text>
+          <text class="detail-value">{{currentRegistration.license_plate}}</text>
+        </view>
         <view class="detail-item">
           <text class="detail-label">参赛日期：</text>
           <view class="dates-list">

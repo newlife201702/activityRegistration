@@ -1,6 +1,6 @@
 .registration-form-container {
   padding: 20px;
-  background-color: #f8f8f8;
+  background-color: #f0f9ff;
   min-height: 100vh;
 }
 
@@ -51,6 +51,14 @@
   font-weight: bold;
   margin-bottom: 10px;
   color: #333;
+}
+
+/* 选填项样式 */
+.optional-text {
+  font-size: 14px;
+  font-weight: normal;
+  color: #999;
+  margin-left: 5px;
 }
 
 .form-input {

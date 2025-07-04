@@ -67,6 +67,11 @@
     </view>
     
     <view class="form-item">
+      <view class="form-item-label">7. 您的车牌号<text class="optional-text">（选填）</text></view>
+      <input class="form-input" value="{{licensePlate}}" bindinput="onLicensePlateInput" placeholder="请输入车牌号，如无可不填" />
+    </view>
+    
+    <view class="form-item">
       <view class="form-item-label">您的报名费用</view>
       <view class="fee-info">
         <text class="fee-amount">{{fee}}</text> 元
@@ -78,7 +83,11 @@
       <checkbox-group bindchange="onAgreeChange">
         <label class="checkbox-label">
           <checkbox value="agree" checked="{{isAgree}}" />
-          <text class="checkbox-text">参赛须知：系统报名成功后参赛信息不可修改，请确认保存细确认报名信息。选手因个人原因报名后不参加比赛报名费用不予退还。</text>
+          <text class="checkbox-text">参赛须知：
+            (1)系统报名成功后参赛信息不可修改，请确认保存确认报名信息。
+            (2)选手因个人原因报名后不参加比赛报名费用不予退还。
+            (3)参赛前请选手提前半小时进场抽签，签署参赛责任书。
+          </text>
         </label>
       </checkbox-group>
     </view>

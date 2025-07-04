@@ -5,6 +5,7 @@ Page({
     name: '', // 姓名
     gender: '', // 性别，男/女
     contact: '', // 联系方式
+    licensePlate: '', // 车牌号（选填）
     idNumber: '', // 证件号码
     helper: '', // 帮抄人员
     dailyCompetitionTimes: [], // 所有可选的比赛日期
@@ -123,6 +124,13 @@ Page({
   onContactInput: function(e) {
     this.setData({
       contact: e.detail.value
+    });
+  },
+
+  // 输入车牌号
+  onLicensePlateInput: function(e) {
+    this.setData({
+      licensePlate: e.detail.value
     });
   },
 
@@ -273,6 +281,7 @@ Page({
         name: that.data.name,
         gender: that.data.gender,
         contact: that.data.contact,
+        licensePlate: that.data.licensePlate,
         idNumber: that.data.idNumber,
         helper: that.data.helper,
         selectedDates: selectedDatesStr,
